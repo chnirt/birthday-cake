@@ -1,0 +1,35 @@
+{
+  "name": "react-vite-ts",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@types/react-lottie": "1.2.10",
+    "@types/react-speech-recognition": "3.9.5",
+    "react": "^18.2.0",
+    "react-audio-player": "0.17.0",
+    "react-dom": "^18.2.0",
+    "react-lottie": "1.2.4",
+    "react-speech-recognition": "3.10.0",
+    "regenerator-runtime": "0.14.1",
+    "sass": "1.72.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.65",
+    "@types/react-dom": "^18.2.21",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "typescript": "^5.4.2",
+    "vite": "^5.1.6"
+  }
+}
