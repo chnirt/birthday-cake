@@ -6,7 +6,7 @@ import confettiData from "./assets/confetti.json";
 import hbdData from "./assets/hbd.json";
 import "./App.css";
 
-const src = "./src/assets/korea-hbd.mp3";
+const src = "/assets/korea-hbd.mp3";
 
 function App() {
   const [candleVisible, setCandleVisible] = useState(false);
