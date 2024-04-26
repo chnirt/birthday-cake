@@ -105,6 +105,10 @@ function App() {
     }
   }, [isBlowing]);
 
+  useEffect(() => {
+    audioRef.current.preload = "auto";
+  }, []);
+
   const confettiOptions = {
     loop: true,
     autoplay: true,
