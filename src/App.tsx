@@ -107,7 +107,7 @@ function App() {
   }, [isBlowing]);
 
   useEffect(() => {
-    // audioRef.current.preload = "auto";
+    audioRef.current.preload = "auto";
   }, []);
 
   // const confettiOptions = {
@@ -152,9 +152,11 @@ function App() {
       <div
         style={{
           // border: "1px solid blue",
-          justifyContent: "center",
+          // justifyContent: "center",
+          // flex: 1,
+          display: "flex",
+          flexDirection: "column",
           alignItems: "center",
-          flex: 1,
         }}
       >
         {/* <Lottie
@@ -168,7 +170,8 @@ function App() {
           isClickToPauseDisabled
         /> */}
         <dotlottie-player
-          src="./src/assets/hbd.lottie"
+          // src="./src/assets/hbd.lottie"
+          src="/assets/hbd.lottie"
           autoplay
           loop
           style={{
@@ -191,7 +194,8 @@ function App() {
           isClickToPauseDisabled
         /> */}
         <dotlottie-player
-          src="./src/assets/confetti.lottie"
+          // src="./src/assets/confetti.lottie"
+          src="/assets/confetti.lottie"
           autoplay
           loop
           style={{
