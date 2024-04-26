@@ -2,8 +2,8 @@
 // import viteLogo from "/vite.svg";
 import { useCallback, useEffect, useRef, useState } from "react";
 // import Lottie from "react-lottie";
-import confettiData from "./assets/confetti.json";
-import hbdData from "./assets/hbd.json";
+// import confettiData from "./assets/confetti.json";
+// import hbdData from "./assets/hbd.json";
 import "./App.css";
 
 // const src = "/assets/korea-hbd.mp3";
@@ -109,22 +109,22 @@ function App() {
     // audioRef.current.preload = "auto";
   }, []);
 
-  const confettiOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: confettiData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
-  const hbdOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: hbdData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
+  // const confettiOptions = {
+  //   loop: true,
+  //   autoplay: true,
+  //   animationData: confettiData,
+  //   rendererSettings: {
+  //     preserveAspectRatio: "xMidYMid slice",
+  //   },
+  // };
+  // const hbdOptions = {
+  //   loop: true,
+  //   autoplay: true,
+  //   animationData: hbdData,
+  //   rendererSettings: {
+  //     preserveAspectRatio: "xMidYMid slice",
+  //   },
+  // };
 
   return (
     <div
