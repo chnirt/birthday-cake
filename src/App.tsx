@@ -33,8 +33,8 @@ function App() {
   }, []);
 
   const pause = useCallback(() => {
-    // audioRef.current.pause();
-    // setPaused(true);
+    audioRef.current.pause();
+    setPaused(true);
   }, []);
 
   const stopAudio = useCallback(() => {
@@ -45,12 +45,12 @@ function App() {
   }, []);
 
   const start = useCallback(() => {
-    // startAudio();
+    startAudio();
     lightCandle();
   }, [lightCandle, startAudio]);
 
   const stop = useCallback(() => {
-    // stopAudio();
+    stopAudio();
     turnOffTheCandle();
   }, [stopAudio, turnOffTheCandle]);
 
@@ -155,7 +155,7 @@ function App() {
           }
         }
       >
-        <Lottie
+        {/* <Lottie
           style={{
             zIndex: 20,
             visibility: candleVisible ? "visible" : "hidden",
@@ -164,9 +164,9 @@ function App() {
           // height={200}
           width={400}
           isClickToPauseDisabled
-        />
+        /> */}
 
-        <Lottie
+        {/* <Lottie
           style={{
             zIndex: 30,
             visibility: candleVisible ? "visible" : "hidden",
@@ -177,7 +177,7 @@ function App() {
           // isStopped={this.state.isStopped}
           // isPaused={this.state.isPaused}
           isClickToPauseDisabled
-        />
+        /> */}
       </div>
 
       <div
