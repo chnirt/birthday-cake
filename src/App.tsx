@@ -8,7 +8,7 @@ import "@dotlottie/player-component";
 import "./App.css";
 
 // const src = "/assets/korea-hbd.mp3";
-const src = new URL("./assets/korea-hbd.mp3", import.meta.url).href;
+const src = new URL("/assets/korea-hbd.mp3", import.meta.url).href;
 
 function App() {
   const [candleVisible, setCandleVisible] = useState(false);
@@ -16,7 +16,7 @@ function App() {
   const [microphoneStream, setMicrophoneStream] = useState<MediaStream | null>(
     null
   );
-  const [isBlowing, setIsBlowing] = useState(false);
+  // const [isBlowing, setIsBlowing] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(new Audio(src));
   const [playing, setPlaying] = useState(false);
   const [paused, setPaused] = useState(false);
@@ -78,9 +78,10 @@ function App() {
         const threshold = 40;
 
         if (average > threshold) {
-          setIsBlowing(true);
+          // setIsBlowing(true);
+          setCandleVisible(false);
         } else {
-          setIsBlowing(false);
+          // setIsBlowing(false);
         }
       };
 
@@ -100,11 +101,11 @@ function App() {
     };
   }, [blowCandles, microphoneStream]);
 
-  useEffect(() => {
-    if (isBlowing === true) {
-      setCandleVisible(false);
-    }
-  }, [isBlowing]);
+  // useEffect(() => {
+  //   if (isBlowing === true) {
+  //     setCandleVisible(false);
+  //   }
+  // }, [isBlowing]);
 
   useEffect(() => {
     audioRef.current.preload = "auto";
@@ -145,7 +146,7 @@ function App() {
         <div className="drip drip2"></div>
         <div className="drip drip3"></div>
         <div className="candle">
-          {candleVisible && !isBlowing ? <div className="flame"></div> : null}
+          {candleVisible ? <div className="flame"></div> : null}
         </div>
       </div>
 
