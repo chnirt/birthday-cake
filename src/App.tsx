@@ -33,8 +33,8 @@ function App() {
   }, []);
 
   const pause = useCallback(() => {
-    audioRef.current.pause();
-    setPaused(true);
+    // audioRef.current.pause();
+    // setPaused(true);
   }, []);
 
   const stopAudio = useCallback(() => {
@@ -45,12 +45,12 @@ function App() {
   }, []);
 
   const start = useCallback(() => {
-    startAudio();
+    // startAudio();
     lightCandle();
   }, [lightCandle, startAudio]);
 
   const stop = useCallback(() => {
-    stopAudio();
+    // stopAudio();
     turnOffTheCandle();
   }, [stopAudio, turnOffTheCandle]);
 
@@ -106,7 +106,7 @@ function App() {
   }, [isBlowing]);
 
   useEffect(() => {
-    audioRef.current.preload = "auto";
+    // audioRef.current.preload = "auto";
   }, []);
 
   const confettiOptions = {
