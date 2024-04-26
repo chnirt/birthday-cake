@@ -1,7 +1,7 @@
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
 import { useCallback, useEffect, useRef, useState } from "react";
-import Lottie from "react-lottie";
+// import Lottie from "react-lottie";
 import confettiData from "./assets/confetti.json";
 import hbdData from "./assets/hbd.json";
 import "./App.css";
