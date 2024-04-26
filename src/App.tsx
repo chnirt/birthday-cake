@@ -13,11 +13,10 @@ const src = new URL("/assets/korea-hbd.mp3", import.meta.url).href;
 function App() {
   const [candleVisible, setCandleVisible] = useState(false);
 
-  const [microphoneStream, setMicrophoneStream] = useState<MediaStream | null>(
-    null
-  );
   // const [isBlowing, setIsBlowing] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(new Audio(src));
+  const microphoneStreamRef = useRef<MediaStream | null>(null);
+
   const [playing, setPlaying] = useState(false);
   const [paused, setPaused] = useState(false);
 
@@ -60,7 +59,7 @@ function App() {
       const stream = await navigator.mediaDevices.getUserMedia({
         audio: true,
       });
-      setMicrophoneStream(stream);
+      microphoneStreamRef.current = stream;
 
       const audioContext = new AudioContext();
       const source = audioContext.createMediaStreamSource(stream);
@@ -95,11 +94,13 @@ function App() {
     blowCandles();
 
     return () => {
-      if (microphoneStream) {
-        microphoneStream.getTracks().forEach((track) => track.stop());
+      if (microphoneStreamRef.current) {
+        microphoneStreamRef.current
+          .getTracks()
+          .forEach((track) => track.stop());
       }
     };
-  }, [blowCandles, microphoneStream]);
+  }, [blowCandles]);
 
   // useEffect(() => {
   //   if (isBlowing === true) {
