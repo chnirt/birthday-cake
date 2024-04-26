@@ -158,7 +158,7 @@ function App() {
         <Lottie
           style={{
             zIndex: 20,
-            visibility: playing ? "visible" : "hidden",
+            visibility: candleVisible ? "visible" : "hidden",
           }}
           options={hbdOptions}
           // height={200}
@@ -169,7 +169,7 @@ function App() {
         <Lottie
           style={{
             zIndex: 30,
-            visibility: playing ? "visible" : "hidden",
+            visibility: candleVisible ? "visible" : "hidden",
           }}
           options={confettiOptions}
           // height={200}
