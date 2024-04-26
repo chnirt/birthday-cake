@@ -164,7 +164,7 @@ function App() {
         {/* <Lottie
           style={{
             zIndex: 20,
-            visibility: candleVisible ? "visible" : "hidden",
+            visibility: playing ? "visible" : "hidden",
           }}
           options={hbdOptions}
           // height={200}
@@ -178,7 +178,7 @@ function App() {
           loop
           style={{
             zIndex: 20,
-            visibility: candleVisible ? "visible" : "hidden",
+            visibility: playing ? "visible" : "hidden",
             width: 400,
           }}
         />
@@ -186,7 +186,7 @@ function App() {
         {/* <Lottie
           style={{
             zIndex: 30,
-            visibility: candleVisible ? "visible" : "hidden",
+            visibility: playing ? "visible" : "hidden",
           }}
           options={confettiOptions}
           // height={200}
@@ -202,7 +202,7 @@ function App() {
           loop
           style={{
             zIndex: 30,
-            visibility: candleVisible ? "visible" : "hidden",
+            visibility: playing ? "visible" : "hidden",
             width: 400,
           }}
         />
