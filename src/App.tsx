@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 // import Lottie from "react-lottie";
 // import confettiData from "./assets/confetti.json";
 // import hbdData from "./assets/hbd.json";
+import "@dotlottie/player-component";
 import "./App.css";
 
 // const src = "/assets/korea-hbd.mp3";
@@ -149,11 +150,12 @@ function App() {
       </div>
 
       <div
-        style={
-          {
-            // border: "1px solid blue",
-          }
-        }
+        style={{
+          // border: "1px solid blue",
+          justifyContent: "center",
+          alignItems: "center",
+          flex: 1,
+        }}
       >
         {/* <Lottie
           style={{
@@ -165,6 +167,16 @@ function App() {
           width={400}
           isClickToPauseDisabled
         /> */}
+        <dotlottie-player
+          src="./src/assets/hbd.lottie"
+          autoplay
+          loop
+          style={{
+            zIndex: 20,
+            visibility: candleVisible ? "visible" : "hidden",
+            width: 400,
+          }}
+        />
 
         {/* <Lottie
           style={{
@@ -178,6 +190,16 @@ function App() {
           // isPaused={this.state.isPaused}
           isClickToPauseDisabled
         /> */}
+        <dotlottie-player
+          src="./src/assets/confetti.lottie"
+          autoplay
+          loop
+          style={{
+            zIndex: 30,
+            visibility: candleVisible ? "visible" : "hidden",
+            width: 400,
+          }}
+        />
       </div>
 
       <div
