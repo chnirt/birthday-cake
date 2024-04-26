@@ -72,14 +72,9 @@ function App() {
 
       const detectBlow = () => {
         analyser.getByteFrequencyData(dataArray);
-        // const average =
-        //   dataArray.reduce((acc, val) => acc + val, 0) / bufferLength;
-        // const threshold = 45;
-
-        const sum = dataArray.reduce((acc, val) => acc + val, 0);
-        const average = sum / bufferLength;
-
-        const threshold = average * 0.8;
+        const average =
+          dataArray.reduce((acc, val) => acc + val, 0) / bufferLength;
+        const threshold = 45;
 
         if (average > threshold) {
           // setIsBlowing(true);
