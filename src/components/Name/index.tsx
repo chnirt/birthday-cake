@@ -55,10 +55,11 @@ export const Name = forwardRef(
               fontSize: "2rem",
               color: "#f0e4d0",
               opacity: 0.9,
+              border: 0,
+              outline: 0,
               ...(playing
                 ? {
                     // appearance: "none",
-                    border: 0,
                     backgroundColor: "transparent",
                     textAlign: "center",
                   }

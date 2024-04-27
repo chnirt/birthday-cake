@@ -177,6 +177,18 @@ function App() {
           options: {
             zIndex: 10000,
           },
+          buttonSkip: {
+            outline: 0,
+          },
+          buttonNext: {
+            outline: 0,
+          },
+          buttonBack: {
+            outline: 0,
+          },
+          buttonClose: {
+            outline: 0,
+          },
         }}
         steps={steps}
         run={run}
@@ -256,7 +268,6 @@ function App() {
             playing,
             paused,
             candleVisible,
-            name,
           }}
         />
       </div>

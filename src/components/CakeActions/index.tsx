@@ -31,7 +31,6 @@ export const CakeActions = ({
   playing,
   paused,
   candleVisible,
-  name,
 }: // eslint-disable-next-line @typescript-eslint/no-explicit-any
 any) => {
   const guide = useCallback(() => setRun(true), [setRun]);
@@ -72,7 +71,7 @@ any) => {
           </button>
         ) : null}
         <CopyToClipboard
-          text={name}
+          text={window.location.href}
           onCopy={() => toast("Copied to clipboard!")}
         >
           <button id="share" style={buttonStyle}>
@@ -84,7 +83,6 @@ any) => {
   }, [
     candleVisible,
     guide,
-    name,
     pause,
     paused,
     playing,
