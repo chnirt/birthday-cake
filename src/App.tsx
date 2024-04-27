@@ -6,9 +6,30 @@ import { useCallback, useEffect, useRef, useState } from "react";
 // import hbdData from "./assets/hbd.json";
 import "@dotlottie/player-component";
 import "./App.css";
+import { Cake } from "./components/Cake";
+import { CakeActions } from "./components/CakeActions";
 
 // const src = "/assets/korea-hbd.mp3";
 const src = new URL("/assets/korea-hbd.mp3", import.meta.url).href;
+
+const steps = [
+  {
+    target: "#start",
+    content: "Press start to play music and light the candle",
+  },
+  {
+    target: "#pause",
+    content: "Press pause if you want the music to pause temporarily",
+  },
+  {
+    target: "#stop",
+    content: "Press stop if you want to cancel temporarily",
+  },
+  {
+    target: "#toggle-candle",
+    content: "Press light if you want to light or blow out the candle",
+  },
+];
 
 function App() {
   const [candleVisible, setCandleVisible] = useState(false);
@@ -19,10 +40,14 @@ function App() {
 
   const [playing, setPlaying] = useState(false);
   const [paused, setPaused] = useState(false);
+  const [run, setRun] = useState(true);
 
-  const lightCandle = useCallback(() => {
-    setCandleVisible(true);
-  }, []);
+  const lightCandle = useCallback(() => setCandleVisible(true), []);
+
+  const toggleLightCandle = useCallback(
+    () => setCandleVisible((prevState) => !prevState),
+    []
+  );
 
   const turnOffTheCandle = useCallback(() => setCandleVisible(false), []);
 
@@ -102,77 +127,31 @@ function App() {
     };
   }, [blowCandles]);
 
-  // useEffect(() => {
-  //   if (isBlowing === true) {
-  //     setCandleVisible(false);
-  //   }
-  // }, [isBlowing]);
-
   useEffect(() => {
     audioRef.current.preload = "auto";
   }, []);
 
-  // const confettiOptions = {
-  //   loop: true,
-  //   autoplay: true,
-  //   animationData: confettiData,
-  //   rendererSettings: {
-  //     preserveAspectRatio: "xMidYMid slice",
-  //   },
-  // };
-  // const hbdOptions = {
-  //   loop: true,
-  //   autoplay: true,
-  //   animationData: hbdData,
-  //   rendererSettings: {
-  //     preserveAspectRatio: "xMidYMid slice",
-  //   },
-  // };
-
   return (
     <div
-      style={
-        {
-          // border: "1px solid red",
-        }
-      }
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100dvh",
+        // border: "1px solid red",
+      }}
     >
-      <div className="cake">
-        <div className="plate"></div>
-        <div className="layer layer-bottom"></div>
-        <div className="layer layer-middle"></div>
-        <div className="layer layer-top"></div>
-        <div className="icing"></div>
-        <div className="drip drip1"></div>
-        <div className="drip drip2"></div>
-        <div className="drip drip3"></div>
-        <div className="candle">
-          {candleVisible ? <div className="flame"></div> : null}
-        </div>
-      </div>
+      <Cake {...{ candleVisible }} />
 
       <div
         style={{
-          // border: "1px solid blue",
-          // justifyContent: "center",
-          // flex: 1,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          flex: 1,
+          // border: "1px solid blue",
         }}
       >
-        {/* <Lottie
-          style={{
-            zIndex: 20,
-            visibility: playing ? "visible" : "hidden",
-          }}
-          options={hbdOptions}
-          // height={200}
-          width={400}
-          isClickToPauseDisabled
-        /> */}
         <dotlottie-player
-          // src="./src/assets/hbd.lottie"
           src="/assets/hbd.lottie"
           autoplay
           loop
@@ -183,20 +162,7 @@ function App() {
           }}
         />
 
-        {/* <Lottie
-          style={{
-            zIndex: 30,
-            visibility: playing ? "visible" : "hidden",
-          }}
-          options={confettiOptions}
-          // height={200}
-          width={400}
-          // isStopped={this.state.isStopped}
-          // isPaused={this.state.isPaused}
-          isClickToPauseDisabled
-        /> */}
         <dotlottie-player
-          // src="./src/assets/confetti.lottie"
           src="/assets/confetti.lottie"
           autoplay
           loop
@@ -208,23 +174,20 @@ function App() {
         />
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-          gap: 16,
-          // border: "1px solid white",
+      <CakeActions
+        {...{
+          steps,
+          run,
+          start,
+          pause,
+          stop,
+          toggleLightCandle,
+          setRun,
+          playing,
+          paused,
+          candleVisible,
         }}
-      >
-        <button onClick={playing ? (paused ? start : pause) : start}>
-          {playing ? (paused ? "Play" : "Pause") : "Start"}
-        </button>
-        {playing ? <button onClick={stop}>Stop</button> : null}
-        <button onClick={lightCandle} disabled={candleVisible}>
-          Light candle
-        </button>
-      </div>
+      />
     </div>
   );
 }
