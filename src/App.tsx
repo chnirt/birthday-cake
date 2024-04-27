@@ -1,41 +1,45 @@
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
 import { useCallback, useEffect, useRef, useState } from "react";
-// import Lottie from "react-lottie";
-// import confettiData from "./assets/confetti.json";
-// import hbdData from "./assets/hbd.json";
 import "@dotlottie/player-component";
 import "./App.css";
 import { Cake } from "./components/Cake";
 import { CakeActions } from "./components/CakeActions";
 import { Name } from "./components/Name";
+import Joyride, { ACTIONS, CallBackProps } from "react-joyride";
 
-// const src = "/assets/korea-hbd.mp3";
 const src = new URL("/assets/korea-hbd.mp3", import.meta.url).href;
 
 const steps = [
   {
+    target: "#name",
+    content: "This is the input to enter the name.",
+  },
+  {
+    target: "#candle",
+    content: "Blow on the Lightning port to extinguish the candle.",
+  },
+  {
     target: "#start",
-    content: "Press start to play music and light the candle",
+    content: "Press start to play music and light the candle.",
   },
   {
     target: "#pause",
-    content: "Press pause if you want the music to pause temporarily",
+    content: "Press pause if you want the music to pause temporarily.",
   },
   {
     target: "#stop",
-    content: "Press stop if you want to cancel temporarily",
+    content: "Press stop if you want to cancel temporarily.",
   },
   {
     target: "#toggle-candle",
-    content: "Press light if you want to light or blow out the candle",
+    content: "Press button if you want to light or blow out the candle.",
   },
 ];
 
 function App() {
   const [candleVisible, setCandleVisible] = useState(false);
 
-  // const [isBlowing, setIsBlowing] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(new Audio(src));
   const microphoneStreamRef = useRef<MediaStream | null>(null);
 
@@ -103,10 +107,7 @@ function App() {
         const threshold = 43;
 
         if (average > threshold) {
-          // setIsBlowing(true);
           setCandleVisible(false);
-        } else {
-          // setIsBlowing(false);
         }
       };
 
@@ -115,6 +116,17 @@ function App() {
       console.error("Error accessing microphone:", error);
     }
   }, []);
+
+  const handleJoyrideCallback = useCallback(
+    (data: CallBackProps) => {
+      const { action } = data;
+      if (action === ACTIONS.SKIP || action === ACTIONS.RESET) {
+        // do something
+        typeof setRun === "function" ? setRun(false) : undefined;
+      }
+    },
+    [setRun]
+  );
 
   useEffect(() => {
     blowCandles();
@@ -141,9 +153,24 @@ function App() {
         // border: "1px solid red",
       }}
     >
-      <Cake {...{ candleVisible }} />
+      <Joyride
+        styles={{
+          options: {
+            zIndex: 10000,
+          },
+        }}
+        steps={steps}
+        run={run}
+        showSkipButton
+        continuous
+        callback={handleJoyrideCallback}
+        hideBackButton
+        hideCloseButton
+        showProgress
+        spotlightClicks
+      />
 
-      <Name />
+      <Cake {...{ candleVisible }} />
 
       <div
         style={{
@@ -154,29 +181,38 @@ function App() {
           // border: "1px solid blue",
         }}
       >
-        <dotlottie-player
-          src="/assets/hbd.lottie"
-          autoplay
-          loop
+        <div style={{ flex: 1 }}>
+          <dotlottie-player
+            src="/assets/hbd.lottie"
+            autoplay
+            loop
+            style={{
+              zIndex: 20,
+              visibility: playing ? "visible" : "hidden",
+              width: 400,
+            }}
+          />
+        </div>
+        <div
           style={{
-            zIndex: 20,
-            visibility: playing ? "visible" : "hidden",
-            width: 400,
+            flex: 2,
           }}
-        />
-
-        <dotlottie-player
-          src="/assets/confetti.lottie"
-          autoplay
-          loop
-          style={{
-            zIndex: 30,
-            visibility: playing ? "visible" : "hidden",
-            width: 400,
-          }}
-        />
+        >
+          <Name {...{ playing, run }} />
+        </div>
+        <div style={{ flex: 1 }}>
+          <dotlottie-player
+            src="/assets/confetti.lottie"
+            autoplay
+            loop
+            style={{
+              zIndex: 30,
+              visibility: playing ? "visible" : "hidden",
+              width: 400,
+            }}
+          />
+        </div>
       </div>
-
       <CakeActions
         {...{
           steps,

@@ -1,10 +1,5 @@
-import { useCallback } from "react";
-import Joyride, { ACTIONS, CallBackProps } from "react-joyride";
-
 export const CakeActions = ({
-  steps,
   run,
-  getHelpers,
   start,
   pause,
   stop,
@@ -13,19 +8,8 @@ export const CakeActions = ({
   playing,
   paused,
   candleVisible,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 }: any) => {
-  console.log("🚀 ~ run:", run);
-  const handleJoyrideCallback = useCallback(
-    (data: CallBackProps) => {
-      const { action } = data;
-      if (action === ACTIONS.SKIP || action === ACTIONS.RESET) {
-        // do something
-        typeof setRun === "function" ? setRun(false) : undefined;
-      }
-    },
-    [setRun]
-  );
-
   if (!run) {
     return (
       <div
@@ -74,24 +58,6 @@ export const CakeActions = ({
         // border: "1px solid white",
       }}
     >
-      <Joyride
-        styles={{
-          options: {
-            zIndex: 10000,
-          },
-        }}
-        steps={steps}
-        run={run}
-        showSkipButton
-        continuous
-        getHelpers={getHelpers}
-        callback={handleJoyrideCallback}
-        hideBackButton
-        hideCloseButton
-        showProgress
-        spotlightClicks
-      />
-
       <button id="start" onClick={start} disabled={run}>
         Start
       </button>
