@@ -16,6 +16,7 @@ const steps = [
     target: "#name",
     content: "This is the input to enter the name.",
     placement: "bottom",
+    disableBeacon: true,
   },
   {
     target: "#candle",
@@ -224,7 +225,7 @@ function App() {
           position: "absolute",
           bottom: 0,
           left: "50%",
-          transform: "translate(-50%, -50%)",
+          transform: "translateX(-50%)",
         }}
       >
         <CakeActions

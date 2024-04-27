@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=La+Belle+Aurore|Rock+Salt|Sedgwick+Ave+Display');
+@font-face {
+  font-family: "Montserrat";
+  src: local("Montserrat"),
+    url("./assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf")
+      format("truetype");
+}
 
 #root {
   max-width: 1280px;

@@ -1,5 +1,11 @@
 import { Fragment } from "react/jsx-runtime";
 
+const buttonStyle = {
+  color: "#ffffff",
+  opacity: 0.9,
+  borderWidth: 0,
+};
+
 export const CakeActions = ({
   run,
   start,
@@ -16,24 +22,32 @@ any) => {
     return (
       <Fragment>
         {!playing || paused ? (
-          <button id="start" onClick={start}>
+          <button id="start" style={buttonStyle} onClick={start}>
             Start
           </button>
         ) : null}
         {playing && !paused ? (
-          <button id="pause" onClick={pause}>
+          <button id="pause" style={buttonStyle} onClick={pause}>
             Pause
           </button>
         ) : null}
         {playing ? (
-          <button id="stop" onClick={stop}>
+          <button id="stop" style={buttonStyle} onClick={stop}>
             Stop
           </button>
         ) : null}
-        <button id="toggle-candle" onClick={toggleLightCandle}>
+        <button
+          id="toggle-candle"
+          style={buttonStyle}
+          onClick={toggleLightCandle}
+        >
           {candleVisible ? "Blow out" : "Light"}
         </button>
-        <button id="user-guide" onClick={() => setRun(true)}>
+        <button
+          id="user-guide"
+          style={buttonStyle}
+          onClick={() => setRun(true)}
+        >
           User guide
         </button>
       </Fragment>
@@ -43,16 +57,21 @@ any) => {
   const guideActions = () => {
     return (
       <Fragment>
-        <button id="start" onClick={start} disabled={run}>
+        <button id="start" style={buttonStyle} onClick={start} disabled={run}>
           Start
         </button>
-        <button id="pause" onClick={pause} disabled={run}>
+        <button id="pause" style={buttonStyle} onClick={pause} disabled={run}>
           Pause
         </button>
-        <button id="stop" onClick={stop} disabled={run}>
+        <button id="stop" style={buttonStyle} onClick={stop} disabled={run}>
           Stop
         </button>
-        <button id="toggle-candle" onClick={toggleLightCandle} disabled={run}>
+        <button
+          id="toggle-candle"
+          style={buttonStyle}
+          onClick={toggleLightCandle}
+          disabled={run}
+        >
           {candleVisible ? "Blow out" : "Light"}
         </button>
       </Fragment>

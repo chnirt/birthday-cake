@@ -15,7 +15,7 @@ export const Name = ({ playing, run }: { playing: boolean; run: boolean }) => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const nameParam = urlParams.get("name");
-    if (nameParam !== null && name === "") {
+    if (nameParam !== null) {
       setName(nameParam);
     }
   }, [name]);
@@ -34,10 +34,11 @@ export const Name = ({ playing, run }: { playing: boolean; run: boolean }) => {
         id="name"
         {...{
           style: {
-            fontFamily: "'Sedgwick Ave Display', cursive",
-            fontWeight: "400",
-            fontSize: 32,
+            fontFamily: "Montserrat",
+            fontWeight: "bold",
+            fontSize: 28,
             color: "#f0e4d0",
+            opacity: 0.9,
             lineHeight: "1.5em",
             ...(playing
               ? {
@@ -52,6 +53,7 @@ export const Name = ({ playing, run }: { playing: boolean; run: boolean }) => {
           onChange,
           disabled: playing || run,
           readOnly: playing || run,
+          spellcheck: "false",
         }}
       />
     </div>
