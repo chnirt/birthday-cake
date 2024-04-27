@@ -98,6 +98,9 @@ function App() {
   const stop = useCallback(() => {
     stopAudio();
     turnOffTheCandle();
+    setTimeout(() => {
+      nameRef.current ? nameRef.current.focus() : undefined;
+    }, 0);
   }, [stopAudio, turnOffTheCandle]);
 
   const blowCandles = useCallback(async () => {

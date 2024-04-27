@@ -65,10 +65,12 @@ any) => {
           {/* {candleVisible ? "Blow out" : "Light"} */}
           {candleVisible ? <TbFlameOff /> : <TbFlame />}
         </button>
-        <button id="user-guide" style={buttonStyle} onClick={guide}>
-          {/* User guide */}
-          <TbInfoCircleFilled />
-        </button>
+        {!playing ? (
+          <button id="user-guide" style={buttonStyle} onClick={guide}>
+            {/* User guide */}
+            <TbInfoCircleFilled />
+          </button>
+        ) : null}
         <CopyToClipboard
           text={name}
           onCopy={() => toast("Copied to clipboard!")}
