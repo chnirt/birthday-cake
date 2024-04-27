@@ -1,7 +1,7 @@
 import { SetStateAction, useCallback, useEffect, useState } from "react";
 
 export const Name = ({ playing, run }: { playing: boolean; run: boolean }) => {
-  const [name, setName] = useState("yourname");
+  const [name, setName] = useState("Yourname");
 
   const onChange = useCallback(
     (e: { target: { value: SetStateAction<string> } }) => {
@@ -25,6 +25,8 @@ export const Name = ({ playing, run }: { playing: boolean; run: boolean }) => {
       style={{
         position: "absolute",
         top: "25%",
+        left: "50%",
+        transform: "translateX(-50%)",
         display: "flex",
         justifyContent: "center",
         width: "100%",

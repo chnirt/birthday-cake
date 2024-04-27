@@ -8,7 +8,6 @@ import { CakeActions } from "./components/CakeActions";
 import { Name } from "./components/Name";
 import Joyride, { ACTIONS, CallBackProps } from "react-joyride";
 
-// const src = new URL("/assets/korea-hbd.mp3", import.meta.url).href;
 const src = new URL("/assets/hbd2.mp3", import.meta.url).href;
 
 const steps = [
@@ -43,6 +42,7 @@ const steps = [
     content: "Press button if you want to light or blow out the candle.",
     placement: "top",
   },
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ] as any;
 
 function App() {
@@ -148,10 +148,6 @@ function App() {
     };
   }, [blowCandles]);
 
-  useEffect(() => {
-    audioRef.current.preload = "auto";
-  }, []);
-
   return (
     <div
       style={{
@@ -179,6 +175,8 @@ function App() {
         spotlightClicks
       />
 
+      <audio src={src} ref={audioRef} preload="auto" />
+
       <div>
         <Name {...{ playing, run }} />
         <Cake {...{ candleVisible }} />
@@ -186,38 +184,35 @@ function App() {
 
       <div
         style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          flex: 1,
-          // border: "1px solid blue",
+          position: "absolute",
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
         }}
       >
-        <div style={{ flex: 1 }}>
-          <dotlottie-player
-            src="/assets/hbd.lottie"
-            autoplay
-            loop
-            style={{
-              zIndex: 20,
-              visibility: playing ? "visible" : "hidden",
-              width: 400,
-            }}
-          />
-        </div>
+        <dotlottie-player
+          src="/assets/hbd.lottie"
+          autoplay
+          loop
+          style={{
+            zIndex: 20,
+            visibility: playing ? "visible" : "hidden",
+            width: 400,
+          }}
+        />
+      </div>
 
-        <div style={{ flex: 1 }}>
-          <dotlottie-player
-            src="/assets/confetti.lottie"
-            autoplay
-            loop
-            style={{
-              zIndex: 30,
-              visibility: playing ? "visible" : "hidden",
-              width: 400,
-            }}
-          />
-        </div>
+      <div style={{ flex: 1 }}>
+        <dotlottie-player
+          src="/assets/confetti.lottie"
+          autoplay
+          loop
+          style={{
+            zIndex: 30,
+            visibility: playing ? "visible" : "hidden",
+            width: "100%",
+          }}
+        />
       </div>
 
       <div
