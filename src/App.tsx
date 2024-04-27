@@ -8,6 +8,7 @@ import "@dotlottie/player-component";
 import "./App.css";
 import { Cake } from "./components/Cake";
 import { CakeActions } from "./components/CakeActions";
+import { Name } from "./components/Name";
 
 // const src = "/assets/korea-hbd.mp3";
 const src = new URL("/assets/korea-hbd.mp3", import.meta.url).href;
@@ -142,7 +143,7 @@ function App() {
     >
       <Cake {...{ candleVisible }} />
 
-      <Name/>
+      <Name />
 
       <div
         style={{
