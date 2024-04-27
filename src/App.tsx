@@ -42,7 +42,7 @@ const steps = [
     content: "Press button if you want to light or blow out the candle.",
     placement: "top",
   },
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ] as any;
 
 function App() {
@@ -197,12 +197,19 @@ function App() {
           style={{
             zIndex: 20,
             visibility: playing ? "visible" : "hidden",
-            width: 400,
+            width: "100dvw",
           }}
         />
       </div>
 
-      <div style={{ flex: 1 }}>
+      <div
+        style={{
+          position: "absolute",
+          top: "25%",
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+      >
         <dotlottie-player
           src="/assets/confetti.lottie"
           autoplay
@@ -210,7 +217,7 @@ function App() {
           style={{
             zIndex: 30,
             visibility: playing ? "visible" : "hidden",
-            width: "100%",
+            width: "100dvw",
           }}
         />
       </div>

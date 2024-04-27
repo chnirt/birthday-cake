@@ -18,7 +18,7 @@ export const Name = ({ playing, run }: { playing: boolean; run: boolean }) => {
     if (nameParam !== null) {
       setName(nameParam);
     }
-  }, [name]);
+  }, []);
 
   return (
     <div
@@ -29,7 +29,8 @@ export const Name = ({ playing, run }: { playing: boolean; run: boolean }) => {
         transform: "translateX(-50%)",
         display: "flex",
         justifyContent: "center",
-        width: "100%",
+        width: "100dvw",
+        zIndex: 40,
       }}
     >
       <input
@@ -38,13 +39,12 @@ export const Name = ({ playing, run }: { playing: boolean; run: boolean }) => {
           style: {
             fontFamily: "Montserrat",
             fontWeight: "bold",
-            fontSize: 28,
+            fontSize: "2rem",
             color: "#f0e4d0",
             opacity: 0.9,
-            lineHeight: "1.5em",
             ...(playing
               ? {
-                  appearance: "none",
+                  // appearance: "none",
                   border: 0,
                   backgroundColor: "transparent",
                   textAlign: "center",
