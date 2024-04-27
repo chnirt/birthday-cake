@@ -1,9 +1,24 @@
 import { Fragment } from "react/jsx-runtime";
+import {
+  TbPlayerPlayFilled,
+  TbPlayerPauseFilled,
+  TbPlayerStopFilled,
+  TbInfoCircleFilled,
+  TbFlame,
+  TbFlameOff,
+  TbShare3,
+} from "react-icons/tb";
+import { useCallback } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { toast } from "react-toastify";
 
 const buttonStyle = {
   color: "#ffffff",
   opacity: 0.9,
   borderWidth: 0,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
 };
 
 export const CakeActions = ({
@@ -16,24 +31,30 @@ export const CakeActions = ({
   playing,
   paused,
   candleVisible,
+  name,
 }: // eslint-disable-next-line @typescript-eslint/no-explicit-any
 any) => {
-  const actions = () => {
+  const guide = useCallback(() => setRun(true), [setRun]);
+
+  const actions = useCallback(() => {
     return (
       <Fragment>
         {!playing || paused ? (
           <button id="start" style={buttonStyle} onClick={start}>
-            Start
+            {/* Start */}
+            <TbPlayerPlayFilled />
           </button>
         ) : null}
         {playing && !paused ? (
           <button id="pause" style={buttonStyle} onClick={pause}>
-            Pause
+            {/* Pause */}
+            <TbPlayerPauseFilled />
           </button>
         ) : null}
         {playing ? (
           <button id="stop" style={buttonStyle} onClick={stop}>
-            Stop
+            {/* Stop */}
+            <TbPlayerStopFilled />
           </button>
         ) : null}
         <button
@@ -41,30 +62,49 @@ any) => {
           style={buttonStyle}
           onClick={toggleLightCandle}
         >
-          {candleVisible ? "Blow out" : "Light"}
+          {/* {candleVisible ? "Blow out" : "Light"} */}
+          {candleVisible ? <TbFlameOff /> : <TbFlame />}
         </button>
-        <button
-          id="user-guide"
-          style={buttonStyle}
-          onClick={() => setRun(true)}
+        <button id="user-guide" style={buttonStyle} onClick={guide}>
+          {/* User guide */}
+          <TbInfoCircleFilled />
+        </button>
+        <CopyToClipboard
+          text={name}
+          onCopy={() => toast("Copied to clipboard!")}
         >
-          User guide
-        </button>
+          <button id="share" style={buttonStyle}>
+            <TbShare3 />
+          </button>
+        </CopyToClipboard>
       </Fragment>
     );
-  };
+  }, [
+    candleVisible,
+    guide,
+    name,
+    pause,
+    paused,
+    playing,
+    start,
+    stop,
+    toggleLightCandle,
+  ]);
 
-  const guideActions = () => {
+  const guideActions = useCallback(() => {
     return (
       <Fragment>
         <button id="start" style={buttonStyle} onClick={start} disabled={run}>
-          Start
+          {/* Start */}
+          <TbPlayerPlayFilled />
         </button>
         <button id="pause" style={buttonStyle} onClick={pause} disabled={run}>
-          Pause
+          {/* Pause */}
+          <TbPlayerPauseFilled />
         </button>
         <button id="stop" style={buttonStyle} onClick={stop} disabled={run}>
-          Stop
+          {/* Stop */}
+          <TbPlayerStopFilled />
         </button>
         <button
           id="toggle-candle"
@@ -72,11 +112,15 @@ any) => {
           onClick={toggleLightCandle}
           disabled={run}
         >
-          {candleVisible ? "Blow out" : "Light"}
+          {/* {candleVisible ? "Blow out" : "Light"} */}
+          {candleVisible ? <TbFlameOff /> : <TbFlame />}
+        </button>
+        <button id="share" style={buttonStyle}>
+          <TbShare3 />
         </button>
       </Fragment>
     );
-  };
+  }, [candleVisible, pause, run, start, stop, toggleLightCandle]);
 
   return (
     <div

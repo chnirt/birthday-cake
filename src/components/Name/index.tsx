@@ -1,14 +1,22 @@
-import { SetStateAction, useCallback, useEffect, useState } from "react";
+import { SetStateAction, useCallback, useEffect } from "react";
 
-export const Name = ({ playing, run }: { playing: boolean; run: boolean }) => {
-  const [name, setName] = useState("Yourname");
-
+export const Name = ({
+  name,
+  setName,
+  playing,
+  run,
+}: {
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  playing: boolean;
+  run: boolean;
+}) => {
   const onChange = useCallback(
     (e: { target: { value: SetStateAction<string> } }) => {
       setName(e.target.value);
       window.history.pushState({}, "", `?name=${e.target.value}`);
     },
-    []
+    [setName]
   );
 
   useEffect(() => {
@@ -18,7 +26,7 @@ export const Name = ({ playing, run }: { playing: boolean; run: boolean }) => {
     if (nameParam !== null) {
       setName(nameParam);
     }
-  }, []);
+  }, [setName]);
 
   return (
     <div

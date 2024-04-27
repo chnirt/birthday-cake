@@ -42,6 +42,12 @@ const steps = [
     content: "Press button if you want to light or blow out the candle.",
     placement: "top",
   },
+  {
+    target: "#share",
+    content: "Change the name and click 'Share' to send the gift to anyone.",
+    placement: "top",
+  },
+  
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ] as any;
 
@@ -54,6 +60,8 @@ function App() {
   const [playing, setPlaying] = useState(false);
   const [paused, setPaused] = useState(false);
   const [run, setRun] = useState(true);
+
+  const [name, setName] = useState("Yourname");
 
   const lightCandle = useCallback(() => setCandleVisible(true), []);
 
@@ -178,7 +186,7 @@ function App() {
       <audio src={src} ref={audioRef} preload="auto" />
 
       <div>
-        <Name {...{ playing, run }} />
+        <Name {...{ name, setName, playing, run }} />
         <Cake {...{ candleVisible }} />
       </div>
 
@@ -197,7 +205,7 @@ function App() {
           style={{
             zIndex: 20,
             visibility: playing ? "visible" : "hidden",
-            width: "100dvw",
+            width: 400,
           }}
         />
       </div>
@@ -217,7 +225,7 @@ function App() {
           style={{
             zIndex: 30,
             visibility: playing ? "visible" : "hidden",
-            width: "100dvw",
+            width: 400,
           }}
         />
       </div>
@@ -242,6 +250,7 @@ function App() {
             playing,
             paused,
             candleVisible,
+            name,
           }}
         />
       </div>
