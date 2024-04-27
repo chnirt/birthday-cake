@@ -14,28 +14,34 @@ const steps = [
   {
     target: "#name",
     content: "This is the input to enter the name.",
+    placement: "bottom",
   },
   {
     target: "#candle",
     content: "Blow on the Lightning port to extinguish the candle.",
+    placement: "bottom",
   },
   {
     target: "#start",
     content: "Press start to play music and light the candle.",
+    placement: "top",
   },
   {
     target: "#pause",
     content: "Press pause if you want the music to pause temporarily.",
+    placement: "top",
   },
   {
     target: "#stop",
     content: "Press stop if you want to cancel temporarily.",
+    placement: "top",
   },
   {
     target: "#toggle-candle",
     content: "Press button if you want to light or blow out the candle.",
+    placement: "top",
   },
-];
+] as any;
 
 function App() {
   const [candleVisible, setCandleVisible] = useState(false);
@@ -150,6 +156,7 @@ function App() {
         display: "flex",
         flexDirection: "column",
         height: "100dvh",
+        justifyContent: "space-between",
         // border: "1px solid red",
       }}
     >
@@ -170,7 +177,10 @@ function App() {
         spotlightClicks
       />
 
-      <Cake {...{ candleVisible }} />
+      <div>
+        <Name {...{ playing, run }} />
+        <Cake {...{ candleVisible }} />
+      </div>
 
       <div
         style={{
@@ -193,13 +203,7 @@ function App() {
             }}
           />
         </div>
-        <div
-          style={{
-            flex: 2,
-          }}
-        >
-          <Name {...{ playing, run }} />
-        </div>
+
         <div style={{ flex: 1 }}>
           <dotlottie-player
             src="/assets/confetti.lottie"
@@ -213,20 +217,28 @@ function App() {
           />
         </div>
       </div>
-      <CakeActions
-        {...{
-          steps,
-          run,
-          start,
-          pause,
-          stop,
-          toggleLightCandle,
-          setRun,
-          playing,
-          paused,
-          candleVisible,
+
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
         }}
-      />
+      >
+        <CakeActions
+          {...{
+            steps,
+            run,
+            start,
+            pause,
+            stop,
+            toggleLightCandle,
+            setRun,
+            playing,
+            paused,
+            candleVisible,
+          }}
+        />
+      </div>
     </div>
   );
 }

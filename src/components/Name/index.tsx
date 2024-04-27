@@ -21,7 +21,15 @@ export const Name = ({ playing, run }: { playing: boolean; run: boolean }) => {
   }, [name]);
 
   return (
-    <>
+    <div
+      style={{
+        position: "absolute",
+        top: "25%",
+        display: "flex",
+        justifyContent: "center",
+        width: "100%",
+      }}
+    >
       <input
         id="name"
         {...{
@@ -46,6 +54,6 @@ export const Name = ({ playing, run }: { playing: boolean; run: boolean }) => {
           readOnly: playing || run,
         }}
       />
-    </>
+    </div>
   );
 };
