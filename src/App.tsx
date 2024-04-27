@@ -47,7 +47,6 @@ const steps = [
     content: "Change the name and click 'Share' to send the gift to anyone.",
     placement: "top",
   },
-  
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ] as any;
 
@@ -55,13 +54,14 @@ function App() {
   const [candleVisible, setCandleVisible] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement>(new Audio(src));
-  const microphoneStreamRef = useRef<MediaStream | null>(null);
+  const microphoneStreamRef = useRef<MediaStream | undefined>(undefined);
 
   const [playing, setPlaying] = useState(false);
   const [paused, setPaused] = useState(false);
   const [run, setRun] = useState(true);
 
   const [name, setName] = useState("Yourname");
+  const nameRef = useRef<HTMLInputElement>(null);
 
   const lightCandle = useCallback(() => setCandleVisible(true), []);
 
@@ -136,9 +136,12 @@ function App() {
   const handleJoyrideCallback = useCallback(
     (data: CallBackProps) => {
       const { action } = data;
-      if (action === ACTIONS.SKIP || action === ACTIONS.RESET) {
+      if (action === ACTIONS.RESET || action === ACTIONS.CLOSE) {
         // do something
         typeof setRun === "function" ? setRun(false) : undefined;
+        setTimeout(() => {
+          nameRef.current ? nameRef.current.focus() : undefined;
+        }, 0);
       }
     },
     [setRun]
@@ -186,7 +189,7 @@ function App() {
       <audio src={src} ref={audioRef} preload="auto" />
 
       <div>
-        <Name {...{ name, setName, playing, run }} />
+        <Name ref={nameRef} {...{ name, setName, playing, run }} />
         <Cake {...{ candleVisible }} />
       </div>
 
