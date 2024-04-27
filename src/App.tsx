@@ -142,6 +142,8 @@ function App() {
     >
       <Cake {...{ candleVisible }} />
 
+      <Name/>
+
       <div
         style={{
           display: "flex",
