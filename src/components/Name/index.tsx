@@ -60,9 +60,10 @@ export const Name = forwardRef(
               backgroundColor: "#000000",
               ...(playing
                 ? {
-                    // appearance: "none",
+                    appearance: "none",
                     backgroundColor: "transparent",
                     textAlign: "center",
+                    display: name.length > 0 ? "block" : "none",
                   }
                 : {}),
             },

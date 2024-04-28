@@ -201,7 +201,7 @@ function App() {
         spotlightClicks
       />
 
-      <audio src={src} ref={audioRef} preload="auto" />
+      <audio src={src} ref={audioRef} preload="auto" onEnded={stop} />
 
       <div>
         <Name ref={nameRef} {...{ name, setName, playing, run }} />
