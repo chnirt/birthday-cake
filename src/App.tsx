@@ -150,6 +150,8 @@ function App() {
     [setRun]
   );
 
+  const onEnded = useCallback(() => {}, []);
+
   useEffect(() => {
     blowCandles();
 
@@ -201,7 +203,7 @@ function App() {
         spotlightClicks
       />
 
-      <audio src={src} ref={audioRef} preload="auto" onEnded={stop} />
+      <audio src={src} ref={audioRef} preload="auto" onEnded={onEnded} />
 
       <div>
         <Name ref={nameRef} {...{ name, setName, playing, run }} />
