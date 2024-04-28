@@ -57,6 +57,7 @@ export const Name = forwardRef(
               opacity: 0.9,
               border: 0,
               outline: 0,
+              backgroundColor: "#000000",
               ...(playing
                 ? {
                     // appearance: "none",
@@ -71,6 +72,7 @@ export const Name = forwardRef(
             readOnly: playing || run,
             spellCheck: false,
             autoFocus: true,
+            placeholder: "Enter your name",
           }}
         />
       </div>

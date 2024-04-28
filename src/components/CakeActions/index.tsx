@@ -19,6 +19,7 @@ const buttonStyle = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  backgroundColor: "#000000",
 };
 
 export const CakeActions = ({

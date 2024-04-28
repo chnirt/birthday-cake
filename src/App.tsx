@@ -60,7 +60,7 @@ function App() {
   const [paused, setPaused] = useState(false);
   const [run, setRun] = useState(true);
 
-  const [name, setName] = useState("Yourname");
+  const [name, setName] = useState("");
   const nameRef = useRef<HTMLInputElement>(null);
 
   const lightCandle = useCallback(() => setCandleVisible(true), []);
