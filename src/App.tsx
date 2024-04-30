@@ -175,25 +175,13 @@ function App() {
   }, [blowCandles]);
 
   useEffect(() => {
-    (async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          audio: true,
-        });
-
-        if (stream) {
-          const queryString = window.location.search;
-          const urlParams = new URLSearchParams(queryString);
-          const sharedParam = urlParams.get("shared");
-          if (sharedParam) {
-            setRun(false);
-          }
-        }
-      } catch (error) {
-        console.error("Error accessing microphone:", error);
-      }
-    })();
-  }, [start]);
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const sharedParam = urlParams.get("shared");
+    if (sharedParam) {
+      setRun(false);
+    }
+  }, []);
 
   return (
     <div
