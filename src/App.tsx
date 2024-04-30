@@ -1,6 +1,6 @@
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { KeyboardEvent, useCallback, useEffect, useRef, useState } from "react";
 import "@dotlottie/player-component";
 import "./App.css";
 import { Cake } from "./components/Cake";
@@ -150,6 +150,14 @@ function App() {
 
   const onEnded = useCallback(() => {}, []);
 
+  const onKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      setTimeout(() => {
+        nameRef.current ? nameRef.current.blur() : undefined;
+      }, 0);
+    }
+  };
+
   useEffect(() => {
     (async () => {
       try {
@@ -222,10 +230,10 @@ function App() {
         spotlightClicks
       />
 
-      <audio src={src} ref={audioRef} preload="auto" onEnded={onEnded} />
+      <audio {...{ src, ref: audioRef, preload: "auto", onEnded }} />
 
       <div>
-        <Name ref={nameRef} {...{ name, setName, playing, run }} />
+        <Name {...{ ref: nameRef, name, setName, playing, run, onKeyPress }} />
         <Cake {...{ candleVisible }} />
       </div>
 
