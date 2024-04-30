@@ -179,7 +179,7 @@ function App() {
           .forEach((track) => track.stop());
       }
     };
-  }, [start]);
+  }, [blowCandles, start]);
 
   return (
     <div
