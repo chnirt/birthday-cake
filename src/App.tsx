@@ -50,6 +50,16 @@ const steps = [
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ] as any;
 
+const sharedSteps = [
+  {
+    target: "#start",
+    content: "Click here",
+    placement: "top",
+    disableBeacon: true,
+  },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+] as any;
+
 function App() {
   const [candleVisible, setCandleVisible] = useState(false);
 
@@ -59,18 +69,23 @@ function App() {
   const [playing, setPlaying] = useState(false);
   const [paused, setPaused] = useState(false);
   const [run, setRun] = useState(true);
+  const [shareMode, setShareMode] = useState(false);
 
   const [name, setName] = useState("");
   const nameRef = useRef<HTMLInputElement>(null);
 
   const lightCandle = useCallback(() => setCandleVisible(true), []);
 
+  const turnOffTheCandle = useCallback(() => setCandleVisible(false), []);
+
   const toggleLightCandle = useCallback(
     () => setCandleVisible((prevState) => !prevState),
     []
   );
 
-  const turnOffTheCandle = useCallback(() => setCandleVisible(false), []);
+  const turnOnShareMode = useCallback(() => setShareMode(true), []);
+
+  const turnOffShareMode = useCallback(() => setShareMode(true), []);
 
   const startAudio = useCallback(() => {
     setPlaying(true);
@@ -94,15 +109,17 @@ function App() {
   const start = useCallback(() => {
     startAudio();
     lightCandle();
-  }, [lightCandle, startAudio]);
+    turnOnShareMode();
+  }, [lightCandle, startAudio, turnOnShareMode]);
 
   const stop = useCallback(() => {
     stopAudio();
     turnOffTheCandle();
+    turnOffShareMode();
     setTimeout(() => {
       nameRef.current ? nameRef.current.focus() : undefined;
     }, 0);
-  }, [stopAudio, turnOffTheCandle]);
+  }, [stopAudio, turnOffShareMode, turnOffTheCandle]);
 
   const blowCandles = useCallback(async (stream: MediaStream) => {
     try {
@@ -187,7 +204,8 @@ function App() {
     const urlParams = new URLSearchParams(queryString);
     const sharedParam = urlParams.get("shared");
     if (sharedParam) {
-      setRun(false);
+      setCandleVisible(true);
+      setShareMode(true);
     }
   }, []);
 
@@ -219,7 +237,7 @@ function App() {
             outline: 0,
           },
         }}
-        steps={steps}
+        steps={shareMode ? sharedSteps : steps}
         run={run}
         showSkipButton
         continuous
@@ -233,7 +251,9 @@ function App() {
       <audio {...{ src, ref: audioRef, preload: "auto", onEnded }} />
 
       <div>
-        <Name {...{ ref: nameRef, name, setName, playing, run, onKeyPress }} />
+        <Name
+          {...{ ref: nameRef, name, setName, shareMode, run, onKeyPress }}
+        />
         <Cake {...{ candleVisible }} />
       </div>
 
@@ -251,7 +271,7 @@ function App() {
           loop
           style={{
             zIndex: 20,
-            visibility: playing ? "visible" : "hidden",
+            visibility: shareMode ? "visible" : "hidden",
             width: 400,
           }}
         />
@@ -271,7 +291,7 @@ function App() {
           loop
           style={{
             zIndex: 30,
-            visibility: playing ? "visible" : "hidden",
+            visibility: shareMode ? "visible" : "hidden",
             width: 400,
           }}
         />
@@ -287,7 +307,6 @@ function App() {
       >
         <CakeActions
           {...{
-            steps,
             run,
             start,
             pause,

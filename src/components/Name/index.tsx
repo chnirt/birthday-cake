@@ -3,14 +3,14 @@ import { SetStateAction, forwardRef, useCallback, useEffect } from "react";
 interface InputProps {
   name: string;
   setName: React.Dispatch<React.SetStateAction<string>>;
-  playing: boolean;
+  shareMode: boolean;
   run: boolean;
 }
 
 export const Name: React.FC<React.HTMLProps<HTMLInputElement> & InputProps> =
   forwardRef(
     (
-      { name, setName, playing, run, ...rest }: InputProps,
+      { name, setName, shareMode, run, ...rest }: InputProps,
       ref: React.LegacyRef<HTMLInputElement>
     ) => {
       const onChange = useCallback(
@@ -57,7 +57,7 @@ export const Name: React.FC<React.HTMLProps<HTMLInputElement> & InputProps> =
                 outline: 0,
                 backgroundColor: "#000000",
                 width: 400,
-                ...(playing
+                ...(shareMode
                   ? {
                       appearance: "none",
                       backgroundColor: "transparent",
@@ -68,8 +68,8 @@ export const Name: React.FC<React.HTMLProps<HTMLInputElement> & InputProps> =
               },
               value: name,
               onChange,
-              disabled: playing || run,
-              readOnly: playing || run,
+              disabled: shareMode || run,
+              readOnly: shareMode || run,
               spellCheck: false,
               autoFocus: true,
               placeholder: "Enter your name",
