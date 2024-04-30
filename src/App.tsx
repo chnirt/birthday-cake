@@ -138,7 +138,7 @@ function App() {
       const { action } = data;
       if (action === ACTIONS.RESET || action === ACTIONS.CLOSE) {
         // do something
-        typeof setRun === "function" ? setRun(false) : undefined;
+        setRun(false);
         setTimeout(() => {
           nameRef.current ? nameRef.current.focus() : undefined;
         }, 0);
@@ -158,14 +158,6 @@ function App() {
 
         if (stream) {
           blowCandles(stream);
-
-          const queryString = window.location.search;
-          const urlParams = new URLSearchParams(queryString);
-          const sharedParam = urlParams.get("shared");
-          if (sharedParam) {
-            typeof setRun === "function" ? setRun(false) : undefined;
-            start();
-          }
         }
       } catch (error) {
         console.error("Error accessing microphone:", error);
@@ -179,7 +171,31 @@ function App() {
           .forEach((track) => track.stop());
       }
     };
-  }, [blowCandles, start]);
+  }, [blowCandles]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+        });
+
+        if (stream) {
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          const sharedParam = urlParams.get("shared");
+          if (sharedParam) {
+            setRun(false);
+            setTimeout(() => {
+              start();
+            }, 0);
+          }
+        }
+      } catch (error) {
+        console.error("Error accessing microphone:", error);
+      }
+    })();
+  }, [start]);
 
   return (
     <div
