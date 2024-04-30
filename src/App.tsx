@@ -15,6 +15,8 @@ import { CakeActions } from "./components/CakeActions";
 import { Name } from "./components/Name";
 import Joyride, { ACTIONS, CallBackProps } from "react-joyride";
 
+const version = import.meta.env.PACKAGE_VERSION;
+
 const src = new URL("/assets/hbd2.mp3", import.meta.url).href;
 
 const steps = [
@@ -335,7 +337,7 @@ function App() {
       <div
         style={{
           position: "absolute",
-          bottom: 0,
+          bottom: "1.25%",
           left: "50%",
           transform: "translateX(-50%)",
         }}
@@ -353,6 +355,17 @@ function App() {
             candleVisible,
           }}
         />
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          bottom: "0%",
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+      >
+        {version}
       </div>
     </div>
   );
