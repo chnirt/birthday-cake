@@ -363,6 +363,7 @@ function App() {
           bottom: "0%",
           left: "50%",
           transform: "translateX(-50%)",
+          display: "non",
         }}
       >
         {version}
