@@ -187,9 +187,6 @@ function App() {
           const sharedParam = urlParams.get("shared");
           if (sharedParam) {
             setRun(false);
-            setTimeout(() => {
-              start();
-            }, 500);
           }
         }
       } catch (error) {
