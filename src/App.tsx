@@ -164,6 +164,19 @@ function App() {
     };
   }, [blowCandles]);
 
+  useEffect(() => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const sharedParam = urlParams.get("shared");
+
+    if (sharedParam) {
+      typeof setRun === "function" ? setRun(false) : undefined;
+      setTimeout(() => {
+        start();
+      }, 0);
+    }
+  }, [start]);
+
   return (
     <div
       style={{
