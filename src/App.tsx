@@ -1,6 +1,13 @@
 // import reactLogo from "./assets/react.svg";
 // import viteLogo from "/vite.svg";
-import { KeyboardEvent, useCallback, useEffect, useRef, useState } from "react";
+import {
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import "@dotlottie/player-component";
 import "./App.css";
 import { Cake } from "./components/Cake";
@@ -199,7 +206,7 @@ function App() {
     };
   }, [blowCandles]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const sharedParam = urlParams.get("shared");
@@ -222,7 +229,7 @@ function App() {
       <Joyride
         styles={{
           options: {
-            zIndex: 10000,
+            zIndex: shareMode ? 10000 : -10000,
           },
           buttonSkip: {
             outline: 0,
@@ -237,7 +244,35 @@ function App() {
             outline: 0,
           },
         }}
-        steps={shareMode ? sharedSteps : steps}
+        steps={sharedSteps}
+        run={run}
+        showSkipButton
+        continuous
+        callback={handleJoyrideCallback}
+        hideBackButton
+        hideCloseButton
+        showProgress
+        spotlightClicks
+      />
+      <Joyride
+        styles={{
+          options: {
+            zIndex: !shareMode ? 10000 : -10000,
+          },
+          buttonSkip: {
+            outline: 0,
+          },
+          buttonNext: {
+            outline: 0,
+          },
+          buttonBack: {
+            outline: 0,
+          },
+          buttonClose: {
+            outline: 0,
+          },
+        }}
+        steps={steps}
         run={run}
         showSkipButton
         continuous
