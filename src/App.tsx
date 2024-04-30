@@ -74,6 +74,7 @@ function App() {
 
   const startAudio = useCallback(() => {
     setPlaying(true);
+    audioRef.current.load();
     audioRef.current.play();
     setPaused(false);
   }, []);
@@ -185,8 +186,8 @@ function App() {
           const urlParams = new URLSearchParams(queryString);
           const sharedParam = urlParams.get("shared");
           if (sharedParam) {
+            setRun(false);
             setTimeout(() => {
-              setRun(false);
               start();
             }, 500);
           }
