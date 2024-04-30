@@ -103,11 +103,8 @@ function App() {
     }, 0);
   }, [stopAudio, turnOffTheCandle]);
 
-  const blowCandles = useCallback(async () => {
+  const blowCandles = useCallback(async (stream: MediaStream) => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-      });
       microphoneStreamRef.current = stream;
 
       const audioContext = new AudioContext();
@@ -153,7 +150,27 @@ function App() {
   const onEnded = useCallback(() => {}, []);
 
   useEffect(() => {
-    blowCandles();
+    (async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          audio: true,
+        });
+
+        if (stream) {
+          blowCandles(stream);
+
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          const sharedParam = urlParams.get("shared");
+          if (sharedParam) {
+            typeof setRun === "function" ? setRun(false) : undefined;
+            start();
+          }
+        }
+      } catch (error) {
+        console.error("Error accessing microphone:", error);
+      }
+    })();
 
     return () => {
       if (microphoneStreamRef.current) {
@@ -162,19 +179,6 @@ function App() {
           .forEach((track) => track.stop());
       }
     };
-  }, [blowCandles]);
-
-  useEffect(() => {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    const sharedParam = urlParams.get("shared");
-
-    if (sharedParam) {
-      typeof setRun === "function" ? setRun(false) : undefined;
-      setTimeout(() => {
-        start();
-      }, 0);
-    }
   }, [start]);
 
   return (
