@@ -185,10 +185,10 @@ function App() {
           const urlParams = new URLSearchParams(queryString);
           const sharedParam = urlParams.get("shared");
           if (sharedParam) {
-            setRun(false);
             setTimeout(() => {
+              setRun(false);
               start();
-            }, 0);
+            }, 500);
           }
         }
       } catch (error) {
