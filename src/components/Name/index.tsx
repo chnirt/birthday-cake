@@ -58,6 +58,7 @@ export const Name = forwardRef(
               border: 0,
               outline: 0,
               backgroundColor: "#000000",
+              width: 400,
               ...(playing
                 ? {
                     appearance: "none",
