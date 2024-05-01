@@ -310,7 +310,7 @@ function App() {
           loop
           style={{
             zIndex: 20,
-            visibility: shareMode ? "visible" : "hidden",
+            visibility: shareMode || playing ? "visible" : "hidden",
             width: 400,
           }}
         />
@@ -330,7 +330,7 @@ function App() {
           loop
           style={{
             zIndex: 30,
-            visibility: shareMode ? "visible" : "hidden",
+            visibility: shareMode || playing ? "visible" : "hidden",
             width: 400,
           }}
         />
