@@ -4,15 +4,18 @@ interface InputProps {
   name: string;
   setName: React.Dispatch<React.SetStateAction<string>>;
   shareMode: boolean;
+  playing: boolean;
   run: boolean;
 }
 
 export const Name: React.FC<React.HTMLProps<HTMLInputElement> & InputProps> =
   forwardRef(
     (
-      { name, setName, shareMode, run, ...rest }: InputProps,
+      { name, setName, shareMode, playing, run, ...rest }: InputProps,
       ref: React.LegacyRef<HTMLInputElement>
     ) => {
+      console.log("🚀 ~ playing:", playing);
+      console.log("🚀 ~ shareMode:", shareMode);
       const onChange = useCallback(
         (e: { target: { value: SetStateAction<string> } }) => {
           setName(e.target.value);
@@ -57,7 +60,7 @@ export const Name: React.FC<React.HTMLProps<HTMLInputElement> & InputProps> =
                 outline: 0,
                 backgroundColor: "#000000",
                 width: 400,
-                ...(shareMode
+                ...(shareMode || playing
                   ? {
                       appearance: "none",
                       backgroundColor: "transparent",
@@ -68,8 +71,8 @@ export const Name: React.FC<React.HTMLProps<HTMLInputElement> & InputProps> =
               },
               value: name,
               onChange,
-              disabled: shareMode || run,
-              readOnly: shareMode || run,
+              disabled: shareMode || playing || run,
+              readOnly: shareMode || playing || run,
               spellCheck: false,
               autoFocus: true,
               placeholder: "Enter your name",

@@ -92,10 +92,6 @@ function App() {
     []
   );
 
-  const turnOnShareMode = useCallback(() => setShareMode(true), []);
-
-  const turnOffShareMode = useCallback(() => setShareMode(true), []);
-
   const startAudio = useCallback(() => {
     setPlaying(true);
     audioRef.current.load();
@@ -118,17 +114,15 @@ function App() {
   const start = useCallback(() => {
     startAudio();
     lightCandle();
-    turnOnShareMode();
-  }, [lightCandle, startAudio, turnOnShareMode]);
+  }, [lightCandle, startAudio]);
 
   const stop = useCallback(() => {
     stopAudio();
     turnOffTheCandle();
-    turnOffShareMode();
     setTimeout(() => {
       nameRef.current ? nameRef.current.focus() : undefined;
     }, 0);
-  }, [stopAudio, turnOffShareMode, turnOffTheCandle]);
+  }, [stopAudio, turnOffTheCandle]);
 
   const blowCandles = useCallback(async (stream: MediaStream) => {
     try {
@@ -289,7 +283,15 @@ function App() {
 
       <div>
         <Name
-          {...{ ref: nameRef, name, setName, shareMode, run, onKeyPress }}
+          {...{
+            ref: nameRef,
+            name,
+            setName,
+            shareMode,
+            playing,
+            run,
+            onKeyPress,
+          }}
         />
         <Cake {...{ candleVisible }} />
       </div>
