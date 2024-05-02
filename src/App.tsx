@@ -15,7 +15,7 @@ import { CakeActions } from "./components/CakeActions";
 import { Name } from "./components/Name";
 import Joyride, { ACTIONS, CallBackProps } from "react-joyride";
 
-const version = import.meta.env.PACKAGE_VERSION;
+// const version = import.meta.env.PACKAGE_VERSION;
 
 const src = new URL("/assets/hbd2.mp3", import.meta.url).href;
 
@@ -359,7 +359,7 @@ function App() {
         />
       </div>
 
-      <div
+      {/* <div
         style={{
           position: "absolute",
           bottom: "0%",
@@ -369,7 +369,7 @@ function App() {
         }}
       >
         {version}
-      </div>
+      </div> */}
     </div>
   );
 }
