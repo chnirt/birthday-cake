@@ -83,6 +83,8 @@ function App() {
   const [name, setName] = useState("");
   const nameRef = useRef<HTMLInputElement>(null);
 
+  const visibility = shareMode || playing
+
   const lightCandle = useCallback(() => setCandleVisible(true), []);
 
   const turnOffTheCandle = useCallback(() => setCandleVisible(false), []);
@@ -168,7 +170,7 @@ function App() {
     [setRun]
   );
 
-  const onEnded = useCallback(() => {}, []);
+  const onEnded = useCallback(() => { }, []);
 
   const onKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
@@ -310,7 +312,7 @@ function App() {
           loop
           style={{
             zIndex: 20,
-            visibility: shareMode || playing ? "visible" : "hidden",
+            visibility: visibility ? "visible" : "hidden",
             width: 400,
           }}
         />
@@ -330,7 +332,7 @@ function App() {
           loop
           style={{
             zIndex: 30,
-            visibility: shareMode || playing ? "visible" : "hidden",
+            visibility: visibility ? "visible" : "hidden",
             width: 400,
           }}
         />
